@@ -47,32 +47,45 @@
                 <label for = "Price">Price: </label>
                 <input type="text" name = "Price" id="Price" class = "form-control" placeholder = "Price">
             </div>
-            <button type = "submit" class = "btn btn-lg btn-outline-primary" id = "addBooks">Add new book!</button>
         </form>
     </div>
-    <div class = "jumbotron" id="output">
+    <button type = "submit" class = "btn btn-lg btn-outline-primary" id = "addBooks">Add new book!</button>
 
+    <div class = "jumbotron" id="output">
     </div>
 </div>
 <script>
     document.getElementById("addBooks").addEventListener("click", (event) =>{
-        let url = "https://dry-hollows-02853.herokuapp.com/api/books"
+        let url = "https://dry-hollows-02853.herokuapp.com/api/books/" + document.getElementById("ISBN").value
         let xhttp = new XMLHttpRequest();
+
         xhttp.onreadystatechange = function(){
-            if(this.readyState == 4 && this.status == 200){
+            if(this.readyState == 4 && this.status == 200) {
+                // if exists
                 document.getElementById("output").innerHTML =
-                    "<pre>" + this.responseText + "</pre>";
+                    "<p>Book with same ISBN already exists</p>";
+            } else if (this.readyState == 4 && this.status == 404) {
+                // if doesn't exist
+                let url2 = "https://dry-hollows-02853.herokuapp.com/api/books"
+                let xhttp2 = new XMLHttpRequest();
+                xhttp2.onreadystatechange = function(){
+                    document.getElementById("output").innerHTML =
+                            "<p>" + this.responseText + "</p>";
+                };
+
+                let bookData = "Name=" + document.getElementById("Name").value + "&" +
+                                "Author=" + document.getElementById("Author").value + "&" +
+                                "ISBN=" + document.getElementById("ISBN").value + "&" +
+                                "Price=" + document.getElementById("Price").value;
+                console.log(bookData);
+                xhttp2.open('POST', url2, true);
+                xhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp2.send(bookData);
             }
         };
 
-        let bookData = "Name=" + document.getElementById("Name").value + "&" +
-                        "Author=" + document.getElementById("Author").value + "&" +
-                        "ISBN=" + document.getElementById("ISBN").value + "&" +
-                        "Price=" + document.getElementById("Price").value;
-        xhttp.open('POST', url, true);
-
-        xhttp.setRequestHeader("Book-type", "application/x-www-form-urlencoded");
-        xhttp.send(bookData);
+        xhttp.open('GET', url, true);
+        xhttp.send();
     });
 </script>
 </body>

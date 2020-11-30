@@ -33,25 +33,25 @@
         <h2>Please enter the ISBN</h2>
         <div class = "form-group">
             <label for = "ISBN">ISBN: </label>
-            <input type= "text" name="ISBN" id="ISBN" class="form-control" placeholder = "ISBN">
+            <input type= "text" id="ISBN" class="form-control" placeholder = "ISBN">
         </div>
-        <button class = "btn btn-lg btn-outline-primary" id="getISBN">Display books</button>
     </form>
+    <button class = "btn btn-lg btn-outline-primary" id="getISBN">Display books</button>
     <div class="jumbotron" id="output">
 
     </div>
 </div>
 
 <div class="container">
-    <h1>Display all good books with the same ISBN</h1>
-    <form method = "GET" action = "https://dry-hollows-02853.herokuapp.com/api/books?author=name">
+    <h1>Display all good books with the same author</h1>
+    <form method = "GET" action = "https://dry-hollows-02853.herokuapp.com/api/books">
         <h2>Please enter the author's name</h2>
         <div class = "form-group">
-            <label for = "Author">ISBN: </label>
-            <input type= "text" name="Author" id="Author" class="form-control" placeholder = "Author">
+            <label for = "Author">Author: </label>
+            <input type= "text" id="Author" class="form-control" placeholder = "Author">
         </div>
-        <button class = "btn btn-lg btn-outline-primary" id="getAuthor">Display books</button>
     </form>
+    <button class = "btn btn-lg btn-outline-primary" id="getAuthor">Display books</button>
     <div class="jumbotron" id="outputs">
 
     </div>
@@ -60,7 +60,6 @@
 <script>
 
     function CreateTable(data){
-        var selectedIBSN = document.getElementById("ISBN").value;
         let table = "";
         table =
             '<table class="table table-bordered table-hover"> \n' +
@@ -74,17 +73,13 @@
             '   </thead>\n' +
             '   <tbody>\n';
 
-        for (let books in data){
-            if(selectedIBSN === data[books]["ISBN"]){
-                table +=
-                    '       <tr>\n' +
-                    '           <td>' + data[books]["Name"]+  '</td>\n' +
-                    '           <td>' + data[books]["Author"]+  '</td>\n' +
-                    '           <td>' + data[books]["ISBN"]+  '</td>\n' +
-                    '           <td>' + data[books]["Price"]+  '</td>\n' +
-                    '       </tr>\n';
-            }
-        }
+        table +=
+            '       <tr>\n' +
+            '           <td>' + data["Name"]+  '</td>\n' +
+            '           <td>' + data["Author"]+  '</td>\n' +
+            '           <td>' + data["ISBN"]+  '</td>\n' +
+            '           <td>' + data["Price"]+  '</td>\n' +
+            '       </tr>\n';
 
         table +=
             '   </tbody>\n' +
@@ -93,7 +88,6 @@
     }
 
     function CreateTables(data){
-        var selectedAuthor = document.getElementById("Author").value;
         let table = "";
         table =
             '<table class="table table-bordered table-hover"> \n' +
@@ -108,15 +102,13 @@
             '   <tbody>\n';
 
         for (let books in data){
-            if(selectedAuthor === data[books]["Author"]){
-                table +=
-                    '       <tr>\n' +
-                    '           <td>' + data[books]["Name"]+  '</td>\n' +
-                    '           <td>' + data[books]["Author"]+  '</td>\n' +
-                    '           <td>' + data[books]["ISBN"]+  '</td>\n' +
-                    '           <td>' + data[books]["Price"]+  '</td>\n' +
-                    '       </tr>\n';
-            }
+            table +=
+                '       <tr>\n' +
+                '           <td>' + data[books]["Name"]+  '</td>\n' +
+                '           <td>' + data[books]["Author"]+  '</td>\n' +
+                '           <td>' + data[books]["ISBN"]+  '</td>\n' +
+                '           <td>' + data[books]["Price"]+  '</td>\n' +
+                '       </tr>\n';
         }
 
         table +=
@@ -125,7 +117,7 @@
         return table;
     }
     document.getElementById("getISBN").addEventListener("click", (event) =>{
-        let url = "https://dry-hollows-02853.herokuapp.com/api/books/:isbn"
+        let url = "https://dry-hollows-02853.herokuapp.com/api/books/" + document.getElementById("ISBN").value
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function (){
             if (this.readyState == 4 && this.status == 200){
@@ -139,7 +131,7 @@
 
 
     document.getElementById("getAuthor").addEventListener("click", (event) =>{
-        let url = "https://dry-hollows-02853.herokuapp.com/api/books?=name"
+        let url = "https://dry-hollows-02853.herokuapp.com/api/books?author=" + document.getElementById("Author").value;
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function (){
             if (this.readyState == 4 && this.status == 200){
@@ -150,9 +142,6 @@
         xhttp.open('GET', url, true);
         xhttp.send();
     });
-
-
-
 </script>
 </body>
 </html>
