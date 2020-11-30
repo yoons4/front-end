@@ -29,10 +29,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c292832e-38f0-4151-ba8c-2d37df7f7fde" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Library/addPage.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/Library/addPage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Library/findPage.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/Library/findPage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Library/removePage.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/Library/removePage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Library/updatePage.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/Library/updatePage.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,6 +89,7 @@
       <option name="presentableId" value="Default" />
       <updated>1606629776459</updated>
       <workItem from="1606629777745" duration="35127000" />
+      <workItem from="1606713944406" duration="1765000" />
     </task>
     <servers />
   </component>
@@ -109,6 +106,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state width="1398" height="245" key="GridCell.Tab.0.bottom" timestamp="1606712509529">
